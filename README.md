@@ -1,4 +1,4 @@
-# Pi Permission Modes
+# Pi Plan & Permissions
 
 Claude Code–style **permission modes**, **allow / ask / deny rules**, a **structured plan-approval flow** and **multiple-choice questions** for the [pi coding agent](https://pi.dev).
 
@@ -7,8 +7,8 @@ Pi deliberately ships without permission prompts. This package adds them back, w
 ## Install
 
 ```bash
-pi install npm:pi-permission-modes
-pi install /path/to/pi-permission-modes     # from a local checkout
+pi install npm:pi-plan-and-permissions
+pi install /path/to/pi-plan-and-permissions     # from a local checkout
 pi -e ./extensions/index.ts                 # try it for one run
 ```
 

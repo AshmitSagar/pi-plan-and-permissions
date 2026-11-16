@@ -1,5 +1,5 @@
 {
-    "name": "pi-permission-modes",
+    "name": "pi-plan-and-permissions",
     "version": "0.1.0",
     "description": "Permission modes (manual, accept edits, plan, bypass), allow/ask/deny rules, a structured plan-approval flow and multiple-choice questions for the pi coding agent.",
     "type": "module",
@@ -33,7 +33,7 @@
         "pack:check": "npm pack --dry-run"
     },
     "engines": {
-        "node": ">=18"
+        "node": ">=22.19.0"
     },
     "peerDependencies": {
         "@earendil-works/pi-ai": "*",
@@ -52,10 +52,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/AshmitSagar/pi-permission-modes.git"
+        "url": "git+https://github.com/AshmitSagar/pi-plan-and-permissions.git"
     },
-    "homepage": "https://github.com/AshmitSagar/pi-permission-modes#readme",
+    "homepage": "https://github.com/AshmitSagar/pi-plan-and-permissions#readme",
     "bugs": {
-        "url": "https://github.com/AshmitSagar/pi-permission-modes/issues"
+        "url": "https://github.com/AshmitSagar/pi-plan-and-permissions/issues"
     }
 }
