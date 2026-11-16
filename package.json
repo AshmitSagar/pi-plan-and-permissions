@@ -1,0 +1,51 @@
+{
+  "name": "pi-plan-and-permissions",
+  "version": "0.1.0",
+  "description": "Permission modes (manual, accept edits, plan, bypass), allow/ask/deny rules, a structured plan-approval flow and multiple-choice questions for the pi coding agent.",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "pi-coding-agent",
+    "permissions",
+    "plan-mode",
+    "approval",
+    "safety"
+  ],
+  "files": [
+    "extensions",
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": ["./extensions/index.ts"]
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run test",
+    "pack:check": "npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "@types/node": "^22.0.0",
+    "typebox": "*",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

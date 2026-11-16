@@ -1,0 +1,17 @@
+# Enforce LF for all detected text files on check-in and checkout
+* text=auto eol=lf
+
+# Force CRLF for Windows scripts that require it
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Explicitly mark binary files to prevent Git from modifying them
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.woff2 binary
