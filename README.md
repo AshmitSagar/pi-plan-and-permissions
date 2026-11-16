@@ -8,7 +8,7 @@ Pi deliberately ships without permission prompts. This package adds them back, w
 
 ```bash
 pi install npm:pi-plan-and-permissions
-pi install /path/to/pi-plan-and-permissions     # from a local checkout
+pi install /path/to/pi-plan-and-permissions # from a local checkout
 pi -e ./extensions/index.ts                 # try it for one run
 ```
 
