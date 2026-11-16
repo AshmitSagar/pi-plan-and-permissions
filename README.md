@@ -1,4 +1,4 @@
-# pi-plan-and-permissions
+# Pi Permission Modes
 
 Claude Code–style **permission modes**, **allow / ask / deny rules**, a **structured plan-approval flow** and **multiple-choice questions** for the [pi coding agent](https://pi.dev).
 
@@ -7,19 +7,19 @@ Pi deliberately ships without permission prompts. This package adds them back, w
 ## Install
 
 ```bash
-pi install npm:pi-plan-and-permissions      # once published
-pi install /path/to/pi-plan-and-permissions # from a local checkout
+pi install npm:pi-permission-modes
+pi install /path/to/pi-permission-modes     # from a local checkout
 pi -e ./extensions/index.ts                 # try it for one run
 ```
 
 ## Modes
 
-| Mode | Behavior |
-|---|---|
-| `default` (shown as *manual*) | Reads inside the project are free. Edits, writes and bash ask first. |
-| `acceptEdits` | Edits and writes **inside the project** are auto-approved. Bash still asks. |
-| `plan` | Read-only research. Editing tools are hidden and only read-only shell commands run. The model ends by submitting a plan for your approval. |
-| `bypassPermissions` | Everything runs. **Deny rules still apply.** |
+| Mode                          | Behavior                                                                                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `default` (shown as _manual_) | Reads inside the project are free. Edits, writes and bash ask first.                                                                       |
+| `acceptEdits`                 | Edits and writes **inside the project** are auto-approved. Bash still asks.                                                                |
+| `plan`                        | Read-only research. Editing tools are hidden and only read-only shell commands run. The model ends by submitting a plan for your approval. |
+| `bypassPermissions`           | Everything runs. **Deny rules still apply.**                                                                                               |
 
 Switch with:
 
@@ -47,15 +47,15 @@ Pi reserves Shift+Tab for "cycle thinking level" and does not let extensions tak
 3. It submits the plan with `exit_plan_mode`. A plan missing **Context**, **Implementation steps** or **Verification** is rejected before you see it, and the model is shown the template.
 4. You get a scrollable, markdown-rendered review screen:
 
-| Key | Action |
-|---|---|
-| `↑` `↓` / `j` `k` | scroll a line |
-| `PgUp` `PgDn` / `b` `f` `Space` | scroll a page |
-| `g` / `G`, `Home` / `End` | top / bottom |
-| `Tab` / `Shift+Tab` or `1`–`4` | choose an option |
-| `Enter` | confirm |
-| `e` | edit the plan in your editor |
-| `Esc` | keep planning, with feedback |
+| Key                             | Action                       |
+| ------------------------------- | ---------------------------- |
+| `↑` `↓` / `j` `k`               | scroll a line                |
+| `PgUp` `PgDn` / `b` `f` `Space` | scroll a page                |
+| `g` / `G`, `Home` / `End`       | top / bottom                 |
+| `Tab` / `Shift+Tab` or `1`–`4`  | choose an option             |
+| `Enter`                         | confirm                      |
+| `e`                             | edit the plan in your editor |
+| `Esc`                           | keep planning, with feedback |
 
 Approving switches to **accept edits** or **manual**, restores the full tool set, and saves the plan. If you edit the plan first, the model implements your version.
 
@@ -72,13 +72,21 @@ The plan template:
 
 ```markdown
 # <Short title>
+
 ## Context
+
 ## Approach
+
 ## Implementation steps
+
 ### Phase 1 - <name>
+
 - [ ] <concrete step> - `path/to/file` (what changes)
+
 ## Critical files
+
 ## Risks & open questions
+
 ## Verification
 ```
 
@@ -94,22 +102,22 @@ Rules use Claude Code's syntax and are evaluated **deny > ask > allow**:
 // ~/.pi/agent/permissions.json   (global)
 // <project>/.pi/permissions.json (project; "always allow" saves here)
 {
-  "defaultMode": "default",
-  "plansDir": ".pi/plans",   // optional; default ~/.pi/agent/plans
-  "permissions": {
-    "allow": ["Bash(npm run test:*)", "Bash(git diff *)", "Edit(src/**)"],
-    "ask":   ["Bash(git push:*)"],
-    "deny":  ["Read(.env*)", "Bash(rm -rf:*)"]
-  }
+    "defaultMode": "default",
+    "plansDir": ".pi/plans", // optional; default ~/.pi/agent/plans
+    "permissions": {
+        "allow": ["Bash(npm run test:*)", "Bash(git diff *)", "Edit(src/**)"],
+        "ask": ["Bash(git push:*)"],
+        "deny": ["Read(.env*)", "Bash(rm -rf:*)"],
+    },
 }
 ```
 
-| Rule | Matches |
-|---|---|
-| `Bash` / `Edit` / `Read` | every call in that category (`Edit` = `edit` + `write`; `Read` = `read`, `grep`, `find`, `ls`) |
-| `Bash(npm run test:*)` | `npm run test` and `npm run test <anything>` (prefix rule) |
-| `Bash(git diff *)` | glob against the whole command |
-| `Edit(src/**)`, `Read(.env*)` | path globs, relative to the project (`*` stays in a folder, `**` crosses folders) |
+| Rule                          | Matches                                                                                        |
+| ----------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Bash` / `Edit` / `Read`      | every call in that category (`Edit` = `edit` + `write`; `Read` = `read`, `grep`, `find`, `ls`) |
+| `Bash(npm run test:*)`        | `npm run test` and `npm run test <anything>` (prefix rule)                                     |
+| `Bash(git diff *)`            | glob against the whole command                                                                 |
+| `Edit(src/**)`, `Read(.env*)` | path globs, relative to the project (`*` stays in a folder, `**` crosses folders)              |
 
 Details worth knowing:
 
